@@ -31,7 +31,7 @@ plugins {
 apply(plugin = "java")
 
 dependencies {
-    implementation("com.google.protobuf:protobuf-java:3.21.9")
+    implementation("com.google.protobuf:protobuf-java:3.22.3")
 
     // Spring boot
     implementation("org.springframework.boot:spring-boot-starter")
