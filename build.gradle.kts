@@ -22,7 +22,7 @@ plugins {
     kotlin("plugin.spring") version "1.6.21"
 
     id("maven-publish")
-    id("com.jfrog.artifactory") version "4.31.7"
+    id("com.jfrog.artifactory") version "4.31.9"
     id("idea")
     id("org.springframework.boot") version "3.0.1"
     id("io.spring.dependency-management") version "1.0.12.RELEASE"
