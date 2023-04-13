@@ -43,7 +43,7 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka")
     implementation("org.apache.kafka:kafka-streams")
 
-    testImplementation("io.mockk:mockk:1.13.2")
+    testImplementation("io.mockk:mockk:1.13.5")
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("org.awaitility:awaitility:4.2.0")
 
