@@ -1,6 +1,8 @@
 package com.example.basics.batchconsumer;
 
 import io.micrometer.core.instrument.MeterRegistry;
+import java.util.Map;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
@@ -19,16 +21,24 @@ public class FooBatchConsumerConfig {
             final KafkaProperties kafkaProperties,
             final MeterRegistry meterRegistry
     ) {
+        final Map<String, Object> configs = kafkaProperties.buildConsumerProperties();
+
+        // Here we can control the max batch
+        configs.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 50);
         final var defaultKafkaConsumerFactory = new DefaultKafkaConsumerFactory<>(
-                kafkaProperties.buildConsumerProperties(),
+                configs,
                 new StringDeserializer(),
                 new StringDeserializer()
         );
         defaultKafkaConsumerFactory.addListener(new MicrometerConsumerListener<>(meterRegistry));
         final var factory = new ConcurrentKafkaListenerContainerFactory<String, String>();
         factory.setConsumerFactory(defaultKafkaConsumerFactory);
+
+        // mandatory
         factory.setBatchListener(true);
-        factory.getContainerProperties().setIdleBetweenPolls(5000);
+
+        // The bigger idle between poll the more chances to the max poll
+        factory.getContainerProperties().setIdleBetweenPolls(1000);
         return factory;
     }
 

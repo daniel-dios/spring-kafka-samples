@@ -10,7 +10,6 @@ public class FooBatchListener {
 
     private final FooBatchSolver batchFooSolver;
     private final Logger logger = LoggerFactory.getLogger(FooBatchListener.class);
-    private volatile boolean stopped = true;
 
     public FooBatchListener(
             final FooBatchSolver batchFooSolver
@@ -26,13 +25,6 @@ public class FooBatchListener {
     )
     public void consume(List<Message<String>> events) {
         batchFooSolver.execute(events);
-        while (stopped) {
-            // Waiting
-        }
         logger.info("List of events {}", events.size());
-    }
-
-    public void start() {
-        stopped = false;
     }
 }

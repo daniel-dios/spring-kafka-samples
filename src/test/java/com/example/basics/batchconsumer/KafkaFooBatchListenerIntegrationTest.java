@@ -4,6 +4,7 @@ package com.example.basics.batchconsumer;
 import com.example.testutils.KafkaContainerInitializer;
 import java.time.Duration;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.junit.jupiter.api.Test;
@@ -30,18 +31,18 @@ class KafkaFooBatchListenerIntegrationTest {
     private KafkaProperties kafkaProperties;
 
     @Test
-    void shouldConsumeAndIncrementMetric() {
+    void shouldConsumeAndIncrementMetric() throws ExecutionException, InterruptedException {
         final var kafkaTemplate = new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(
                 kafkaProperties.buildProducerProperties(),
                 new StringSerializer(),
                 new StringSerializer()
         ));
         for (int i = 0; i < 100; i++) {
-            kafkaTemplate.send(new ProducerRecord<>("my-app.foo.batch.v1", UUID.randomUUID().toString(), String.valueOf(i)));
+            kafkaTemplate.send(new ProducerRecord<>("my-app.foo.batch.v1", UUID.randomUUID().toString(), String.valueOf(i))).get();
         }
 
         await()
-                .atMost(Duration.ofSeconds(20))
+                .atMost(Duration.ofSeconds(30))
                 .untilAsserted(() -> assertThat(solver.allTheMessagesConsumed()).isNotEmpty().contains(100));
         // we verify the messages were not collected one by one
         assertThat(solver.getEventsCollected().size()).isLessThan(100);

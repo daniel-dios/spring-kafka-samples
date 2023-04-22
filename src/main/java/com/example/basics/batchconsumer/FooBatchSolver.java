@@ -11,7 +11,9 @@ public class FooBatchSolver {
     private final Set<List<Message<String>>> eventsCollected = new HashSet<>();
 
     public void execute(List<Message<String>> events) {
-        eventsCollected.add(events);
+        if (!events.isEmpty()) {
+            eventsCollected.add(events);
+        }
     }
 
     public Set<List<Message<String>>> getEventsCollected() {
