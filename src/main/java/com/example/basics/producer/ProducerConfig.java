@@ -1,4 +1,4 @@
-package com.example.basics.configuration;
+package com.example.basics.producer;
 
 import com.example.basics.producer.KafkaBlockingProducer;
 import io.micrometer.core.instrument.MeterRegistry;

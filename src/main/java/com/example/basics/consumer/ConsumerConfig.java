@@ -1,4 +1,4 @@
-package com.example.basics.configuration;
+package com.example.basics.consumer;
 
 import com.example.basics.consumer.FooListener;
 import io.micrometer.core.instrument.MeterRegistry;
