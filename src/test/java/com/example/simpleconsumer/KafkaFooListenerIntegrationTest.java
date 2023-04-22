@@ -2,6 +2,7 @@ package com.example.simpleconsumer;
 
 
 import com.example.simpleproducer.KafkaBlockingProducer;
+import com.example.testutils.KafkaContainerInitializer;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tags;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import com.example.testutils.KafkaContainerInitializer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;

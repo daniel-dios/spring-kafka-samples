@@ -1,5 +1,7 @@
 package com.example.simpleproducer;
 
+import com.example.testutils.KafkaContainerInitializer;
+import com.example.testutils.helper.KafkaConsumerHelper;
 import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
@@ -10,8 +12,6 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import com.example.testutils.KafkaContainerInitializer;
-import com.example.testutils.helper.KafkaConsumerHelper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
