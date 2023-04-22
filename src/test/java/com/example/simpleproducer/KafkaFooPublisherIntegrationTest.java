@@ -1,4 +1,4 @@
-package com.example.basics.producer;
+package com.example.simpleproducer;
 
 import java.time.Duration;
 import java.util.List;

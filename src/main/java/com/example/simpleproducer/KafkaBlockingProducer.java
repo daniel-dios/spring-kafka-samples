@@ -1,4 +1,4 @@
-package com.example.basics.producer;
+package com.example.simpleproducer;
 
 import java.util.concurrent.ExecutionException;
 import org.slf4j.Logger;

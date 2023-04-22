@@ -1,6 +1,5 @@
-package com.example.basics.producer;
+package com.example.simpleproducer;
 
-import com.example.basics.producer.KafkaBlockingProducer;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;

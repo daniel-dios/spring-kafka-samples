@@ -1,7 +1,7 @@
-package com.example.basics.consumer;
+package com.example.simpleconsumer;
 
 
-import com.example.basics.producer.KafkaBlockingProducer;
+import com.example.simpleproducer.KafkaBlockingProducer;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tags;

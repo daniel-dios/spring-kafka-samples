@@ -1,6 +1,7 @@
-package com.example.basics.batchconsumer;
+package com.example.batchconsumer;
 
 
+import com.example.batchconsumer.FooBatchSolver;
 import com.example.testutils.KafkaContainerInitializer;
 import java.time.Duration;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package com.example.basics.batchconsumer;
+package com.example.batchconsumer;
 
 import java.util.List;
 import org.slf4j.Logger;

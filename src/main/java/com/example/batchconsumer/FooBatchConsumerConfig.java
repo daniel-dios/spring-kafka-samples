@@ -1,4 +1,4 @@
-package com.example.basics.batchconsumer;
+package com.example.batchconsumer;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Map;

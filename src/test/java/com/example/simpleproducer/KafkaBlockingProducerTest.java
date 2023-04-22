@@ -1,4 +1,4 @@
-package com.example.basics.producer;
+package com.example.simpleproducer;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

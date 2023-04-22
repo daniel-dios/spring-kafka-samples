@@ -1,4 +1,4 @@
-package com.example.basics.consumer;
+package com.example.simpleconsumer;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tags;

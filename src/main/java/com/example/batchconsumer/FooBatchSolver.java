@@ -1,4 +1,4 @@
-package com.example.basics.batchconsumer;
+package com.example.batchconsumer;
 
 import java.util.HashSet;
 import java.util.List;
