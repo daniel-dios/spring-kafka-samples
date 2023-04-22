@@ -1,9 +1,7 @@
-package com.example.basics.consumer;
+package com.example.basics.batchconsumer;
 
 import io.micrometer.core.instrument.MeterRegistry;
-import java.util.HashMap;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,29 +9,15 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.MicrometerConsumerListener;
-import org.springframework.kafka.listener.DefaultErrorHandler;
 
 @EnableKafka
 @Configuration
-public class ConsumerConfig {
+public class FooBatchConsumerConfig {
 
     @Bean
-    public DefaultErrorHandler myCustomErrorHandler() {
-        final var classifications = new HashMap<Class<? extends Throwable>, Boolean>();
-        // it won't retry NonRetrievableExceptions
-        classifications.put(FooListener.NonRetrievableException.class, false);
-
-        // it will retry forever all the exceptions by default
-        final var errorHandler = new DefaultErrorHandler();
-        errorHandler.setClassifications(classifications, true);
-        return errorHandler;
-    }
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaFooConsumerContainerFactory(
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaFooBatchConsumerContainerFactory(
             final KafkaProperties kafkaProperties,
-            final MeterRegistry meterRegistry,
-            @Qualifier("myCustomErrorHandler") final DefaultErrorHandler errorHandler
+            final MeterRegistry meterRegistry
     ) {
         final var defaultKafkaConsumerFactory = new DefaultKafkaConsumerFactory<>(
                 kafkaProperties.buildConsumerProperties(),
@@ -43,14 +27,20 @@ public class ConsumerConfig {
         defaultKafkaConsumerFactory.addListener(new MicrometerConsumerListener<>(meterRegistry));
         final var factory = new ConcurrentKafkaListenerContainerFactory<String, String>();
         factory.setConsumerFactory(defaultKafkaConsumerFactory);
-        factory.setCommonErrorHandler(errorHandler);
+        factory.setBatchListener(true);
+        factory.getContainerProperties().setIdleBetweenPolls(5000);
         return factory;
     }
 
     @Bean
-    public FooListener fooListener(
-            final MeterRegistry meterRegistry
+    public FooBatchListener stoppableFooListener(
+            final FooBatchSolver batchFooSolver
     ) {
-        return new FooListener(meterRegistry);
+        return new FooBatchListener(batchFooSolver);
+    }
+
+    @Bean
+    public FooBatchSolver batchFooSolver() {
+        return new FooBatchSolver();
     }
 }
