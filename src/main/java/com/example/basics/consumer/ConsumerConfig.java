@@ -1,6 +1,5 @@
 package com.example.basics.consumer;
 
-import com.example.basics.consumer.FooListener;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.HashMap;
 import org.apache.kafka.common.serialization.StringDeserializer;
