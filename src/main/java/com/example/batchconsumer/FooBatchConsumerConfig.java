@@ -43,7 +43,7 @@ public class FooBatchConsumerConfig {
     }
 
     @Bean
-    public FooBatchListener stoppableFooListener(
+    public FooBatchListener fooBatchListener(
             final FooBatchSolver batchFooSolver
     ) {
         return new FooBatchListener(batchFooSolver);
