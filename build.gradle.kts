@@ -49,7 +49,7 @@ dependencies {
 
     testImplementation("org.testcontainers:testcontainers:1.17.6")
     testImplementation("org.testcontainers:junit-jupiter:1.17.6")
-    testImplementation("org.testcontainers:kafka:1.17.6")
+    testImplementation("org.testcontainers:kafka:1.18.1")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude("org.junit.vintage", "junit-vintage-engine")
